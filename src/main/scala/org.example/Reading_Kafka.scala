@@ -37,7 +37,7 @@ object Reading_Kafka extends App {
   val df = spark.readStream.format("kafka").option("kafka.bootstrap.servers", "ip-172-31-3-80.eu-west-2.compute.internal:9092").option("subscribe", kafkaTopic).option("startingOffsets", "earliest").load().select(from_json(col("Value").cast("string"), schema).alias("data")).selectExpr("data.*")
 
   // Write the DataFrame as CSV files to HDFS
-  df.writeStream.format("csv").option("checkpointLocation", "/tmp/bd_us/Mahmoud/kafka/").option("path", "/tmp/bd_us/Mahmoud/kafka/FraudApi").start().awaitTermination()
+  df.writeStream.format("csv").option("checkpointLocation", "/tmp/jenkins/kafka/fraud_api").option("path", "/tmp/jenkins/kafka/fraud_api/FraudApi").start().awaitTermination()
 
 
 }
