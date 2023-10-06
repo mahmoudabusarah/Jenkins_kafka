@@ -34,6 +34,7 @@ object Reading_Kafka extends App {
   ))
 // hellp
   // sfdsfds
+  //sdasdsadsadsadsadsad
   // Read the JSON messages from Kafka as a DataFrame
   val df = spark.readStream.format("kafka").option("kafka.bootstrap.servers", "ip-172-31-3-80.eu-west-2.compute.internal:9092").option("subscribe", kafkaTopic).option("startingOffsets", "earliest").load().select(from_json(col("Value").cast("string"), schema).alias("data")).selectExpr("data.*")
 
